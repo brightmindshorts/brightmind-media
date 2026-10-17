@@ -5,6 +5,7 @@ on:
     - cron: "7 9 * * *"
     - cron: "7 13 * * *"
     - cron: "7 17 * * *"
+
   workflow_dispatch:
     inputs:
       mode:
@@ -15,6 +16,7 @@ on:
         options:
           - preview
           - publish
+
       slot:
         description: "Turkey time publishing slot"
         required: true
@@ -36,9 +38,10 @@ jobs:
   publish:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+
     steps:
       - name: Download repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: main
 
@@ -71,6 +74,7 @@ jobs:
             mode="$MANUAL_MODE"
             slot="$MANUAL_SLOT"
           fi
+
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
           echo "slot=$slot" >> "$GITHUB_OUTPUT"
 
@@ -87,7 +91,7 @@ jobs:
 
       - name: Save preview files
         if: steps.settings.outputs.mode == 'preview'
-                uses: actions/checkout@v4
+        uses: actions/upload-artifact@v7
         with:
           name: daily-content-preview
           path: preview/
