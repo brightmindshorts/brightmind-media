@@ -87,7 +87,7 @@ jobs:
 
       - name: Save preview files
         if: steps.settings.outputs.mode == 'preview'
-        uses: actions/upload-artifact@v7
+                uses: actions/checkout@v4
         with:
           name: daily-content-preview
           path: preview/
