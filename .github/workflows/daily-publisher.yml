@@ -1,0 +1,95 @@
+name: Daily Instagram publisher
+
+on:
+  schedule:
+    - cron: "7 9 * * *"
+    - cron: "7 13 * * *"
+    - cron: "7 17 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Preview generates files; publish posts to Instagram"
+        required: true
+        type: choice
+        default: preview
+        options:
+          - preview
+          - publish
+      slot:
+        description: "Turkey time publishing slot"
+        required: true
+        type: choice
+        default: "12"
+        options:
+          - "12"
+          - "16"
+          - "20"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-instagram-publisher
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Download repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Configure publishing records
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Install image tools
+        run: python3 -m pip install Pillow==11.3.0
+
+      - name: Select mode and time slot
+        id: settings
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+          MANUAL_MODE: ${{ inputs.mode }}
+          MANUAL_SLOT: ${{ inputs.slot }}
+        shell: bash
+        run: |
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            mode="publish"
+            case "$SCHEDULE" in
+              "7 9 * * *") slot="12" ;;
+              "7 13 * * *") slot="16" ;;
+              "7 17 * * *") slot="20" ;;
+              *) exit 1 ;;
+            esac
+          else
+            mode="$MANUAL_MODE"
+            slot="$MANUAL_SLOT"
+          fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "slot=$slot" >> "$GITHUB_OUTPUT"
+
+      - name: Check Python syntax
+        run: python3 -m py_compile publisher.py
+
+      - name: Generate or publish content
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_USER_ID: ${{ vars.INSTAGRAM_USER_ID }}
+          RUN_MODE: ${{ steps.settings.outputs.mode }}
+          RUN_SLOT: ${{ steps.settings.outputs.slot }}
+        run: python3 publisher.py --mode "$RUN_MODE" --slot "$RUN_SLOT"
+
+      - name: Save preview files
+        if: steps.settings.outputs.mode == 'preview'
+        uses: actions/upload-artifact@v7
+        with:
+          name: daily-content-preview
+          path: preview/
+          retention-days: 3
+          if-no-files-found: error
