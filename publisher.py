@@ -1,0 +1,280 @@
+import argparse
+import hashlib
+import json
+import os
+import subprocess
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from datetime import datetime
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+from PIL import Image, ImageDraw, ImageFont
+
+
+ROOT = Path(__file__).resolve().parent
+os.chdir(ROOT)
+
+STATE = Path("state.json")
+BASE = "https://graph.instagram.com/v25.0"
+TOKEN = os.environ.get("INSTAGRAM_ACCESS_TOKEN", "").strip()
+USER_ID = os.environ.get("INSTAGRAM_USER_ID", "").strip()
+REPO = os.environ.get("GITHUB_REPOSITORY", "")
+FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed.ttf"
+
+
+def git(*args):
+    return subprocess.check_output(
+        ["git", *args], text=True, stderr=subprocess.STDOUT
+    ).strip()
+
+
+def save(state, assets=None):
+    STATE.write_text(json.dumps(state, indent=2), encoding="utf-8")
+    paths = ["state.json"]
+    if assets:
+        paths.append(str(assets))
+    git("add", "--", *paths)
+    if git("diff", "--cached", "--name-only"):
+        git("commit", "-m", "Update publishing state and media")
+        git("push", "origin", "HEAD:main")
+
+
+def api(path, data=None):
+    body = None
+    if data is not None:
+        body = urllib.parse.urlencode(data).encode()
+    request = urllib.request.Request(
+        BASE + "/" + path,
+        data=body,
+        headers={"Authorization": "Bearer " + TOKEN},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=45) as response:
+            return json.load(response)
+    except urllib.error.HTTPError as error:
+        try:
+            detail = json.load(error).get("error", {})
+        except Exception:
+            detail = {}
+        message = str(detail.get("message", "Request failed"))
+        raise RuntimeError(
+            f"Meta HTTP {error.code}: "
+            + message.replace(TOKEN, "[REDACTED]")
+        ) from None
+    except Exception:
+        raise RuntimeError(
+            "Network error. Publishing state was retained; inspect before retrying."
+        ) from None
+
+
+def render(text, folder):
+    folder.mkdir(parents=True, exist_ok=True)
+
+    for name, height in (("post", 1350), ("story", 1920)):
+        image = Image.new("RGB", (1080, height), "black")
+        draw = ImageDraw.Draw(image)
+        lines = text.splitlines()
+
+        for size in range(66, 29, -2):
+            font = ImageFont.truetype(FONT, size)
+            if max(draw.textlength(line, font=font) for line in lines) <= 900:
+                break
+        else:
+            raise RuntimeError("Text is too wide for the template.")
+
+        box = draw.multiline_textbbox(
+            (0, 0), text, font=font, spacing=22
+        )
+        text_height = box[3] - box[1]
+        if text_height > height - 500:
+            raise RuntimeError("Text is too tall for the template.")
+
+        y = (height - text_height) / 2 - box[1]
+        draw.multiline_text(
+            (90, y), text, font=font, fill="white", spacing=22
+        )
+        image.save(folder / f"{name}.jpg", quality=95)
+
+
+def fingerprint(item):
+    return hashlib.sha256(item["text"].encode()).hexdigest()
+
+
+def publish_part(state, entry, kind):
+    part = entry.setdefault(kind, {})
+
+    if part.get("status") == "done":
+        print(kind, "already published")
+        return
+
+    if part.get("status") == "creating":
+        raise RuntimeError(
+            f"{kind}: previous container creation was interrupted. "
+            "Inspect the previous run before changing state."
+        )
+
+    if not part.get("container"):
+        part["status"] = "creating"
+        save(state)
+
+        data = {"image_url": entry["urls"][kind]}
+        if kind == "story":
+            data["media_type"] = "STORIES"
+        else:
+            data["caption"] = entry["caption"]
+
+        result = api(USER_ID + "/media", data)
+        container = result.get("id")
+        if not container:
+            raise RuntimeError("Meta did not return a container ID.")
+
+        part.update(container=container, status="processing")
+        save(state)
+
+    container = part["container"]
+    previous_publish_uncertain = part.get("status") == "publishing"
+
+    for attempt in range(18):
+        result = api(container + "?fields=status_code")
+        status = result.get("status_code")
+        print(kind, "container", container, "status", status, flush=True)
+
+        if status == "PUBLISHED":
+            part["status"] = "done"
+            save(state)
+            return
+
+        if previous_publish_uncertain:
+            raise RuntimeError(
+                f"{kind}: previous publish result is uncertain. "
+                "Check Instagram and the container before retrying."
+            )
+
+        if status == "FINISHED":
+            break
+        if status in ("ERROR", "EXPIRED"):
+            raise RuntimeError(f"{kind}: container is {status}")
+        time.sleep(10)
+    else:
+        raise RuntimeError("Media is still processing; its ID was saved.")
+
+    part["status"] = "publishing"
+    save(state)
+
+    result = api(USER_ID + "/media_publish", {"creation_id": container})
+    media_id = result.get("id")
+    if not media_id:
+        raise RuntimeError("No media ID returned; check Instagram.")
+
+    part.update(status="done", media_id=media_id)
+    save(state)
+    print(kind, "published:", media_id, flush=True)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--mode", choices=["preview", "publish"], required=True)
+    parser.add_argument("--slot", choices=["12", "16", "20"], default="12")
+    args = parser.parse_args()
+
+    items = json.loads(Path("content.json").read_text(encoding="utf-8"))
+    if not items:
+        raise RuntimeError("The content bank is empty.")
+
+    if args.mode == "preview":
+        render(items[0]["text"], Path("preview"))
+        Path("preview/caption.txt").write_text(
+            items[0]["caption"], encoding="utf-8"
+        )
+        print("Preview created. Nothing was published.")
+        return
+
+    if not TOKEN or not USER_ID.isdigit():
+        raise RuntimeError("Instagram credentials are missing.")
+    if REPO != "brightmindshorts/brightmind-media":
+        raise RuntimeError("Unexpected repository.")
+
+    now = datetime.now(ZoneInfo("Europe/Istanbul"))
+    hour = int(args.slot)
+    if now.hour != hour:
+        raise RuntimeError(
+            "Outside the selected one-hour publishing window. Slot skipped."
+        )
+
+    account = api("me?fields=user_id,username")
+    if (
+        account.get("username", "").lower() != "brightmindshorts"
+        or str(account.get("user_id", "")) != USER_ID
+    ):
+        raise RuntimeError("Unexpected Instagram account.")
+
+    state = (
+        json.loads(STATE.read_text(encoding="utf-8"))
+        if STATE.exists() else {"entries": {}}
+    )
+    entries = state["entries"]
+    key = f"{now:%Y-%m-%d}-{args.slot}"
+
+    # Resolve incomplete work before creating a new pair of publications.
+    pending = [
+        name for name, value in entries.items()
+        if name != key
+        and (
+            value.get("post", {}).get("status") != "done"
+            or value.get("story", {}).get("status") != "done"
+        )
+    ]
+    if pending:
+        raise RuntimeError("An earlier item needs attention: " + pending[0])
+
+    if key not in entries:
+        used = {value["fingerprint"] for value in entries.values()}
+        item = next(
+            (item for item in items if fingerprint(item) not in used), None
+        )
+        if item is None:
+            raise RuntimeError(
+                "Content bank exhausted. Add new original items to content.json."
+            )
+
+        folder = Path("generated") / key
+        render(item["text"], folder)
+        entry = {
+            "fingerprint": fingerprint(item),
+            "text": item["text"],
+            "caption": item["caption"],
+            "post": {},
+            "story": {},
+        }
+        entries[key] = entry
+        save(state, folder)
+
+        # Immutable URLs prevent a later update from changing this publication.
+        revision = git("rev-parse", "HEAD")
+        entry["urls"] = {
+            kind: (
+                f"https://raw.githubusercontent.com/{REPO}/{revision}/"
+                f"{folder.as_posix()}/{kind}.jpg"
+            )
+            for kind in ("post", "story")
+        }
+        save(state)
+    else:
+        entry = entries[key]
+        if "urls" not in entry:
+            raise RuntimeError("Asset setup was interrupted; inspect state.json.")
+
+    publish_part(state, entry, "post")
+    publish_part(state, entry, "story")
+
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        with open(summary, "a") as stream:
+            stream.write(f"Published post and story for `{key}`.\n")
+
+
+if __name__ == "__main__":
+    main()
