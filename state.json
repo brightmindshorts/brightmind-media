@@ -29,8 +29,9 @@
         "media_id": "18151743397534169"
       },
       "story": {
-        "status": "publishing",
-        "container": "17900118126606736"
+        "status": "done",
+        "container": "17900118126606736",
+        "media_id": "17879776359630535"
       },
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/6c5d9866d959b7ff44e370fbfe6760d90101594a/generated/2026-10-18-16/post.jpg",
