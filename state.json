@@ -42,7 +42,9 @@
       "fingerprint": "f7943448fa7474c448a882a6acb387a17f8fbb8fad5542785ba786efd862469d",
       "text": "A quiet day of effort\nstill counts.",
       "caption": "Progress does not need an audience. Notice what you did today.\n\n#progress #consistency #growth",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/0cca3ce90994902452874697bbfe4737adba0075/generated/2026-10-18-20/post.jpg",
