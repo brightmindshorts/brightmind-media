@@ -100,7 +100,11 @@
       "text": "Finish one small thing.\nLet that be enough today.",
       "caption": "Choose a clear finish line for your next task.\n\n#smallsteps #focus #progress",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/0e4a44dcbf143e900daf7b47b6bfdc1843cfcbc9/generated/2026-10-19-20/post.jpg",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/0e4a44dcbf143e900daf7b47b6bfdc1843cfcbc9/generated/2026-10-19-20/story.jpg"
+      }
     }
   }
 }
