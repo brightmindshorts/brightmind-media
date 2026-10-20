@@ -119,7 +119,11 @@
       "text": "Build a routine\nfor your ordinary days.",
       "caption": "Create a version of your habit that fits a busy day, too.\n\n#habits #consistency #discipline",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/459cd50747d9e1005dc8359ee8abe854e4b0007b/generated/2026-10-20-12/post.jpg",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/459cd50747d9e1005dc8359ee8abe854e4b0007b/generated/2026-10-20-12/story.jpg"
+      }
     }
   }
 }
