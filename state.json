@@ -123,7 +123,10 @@
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/459cd50747d9e1005dc8359ee8abe854e4b0007b/generated/2026-10-20-12/post.jpg",
         "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/459cd50747d9e1005dc8359ee8abe854e4b0007b/generated/2026-10-20-12/story.jpg"
-      }
+      },
+      "abandoned": true,
+      "abandon_reason": "Both parts were empty before any Meta creation intent. Unused content released without publishing."
     }
-  }
+  },
+  "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
 }
