@@ -16,6 +16,7 @@ on:
         options:
           - preview
           - publish
+          - repair
 
       slot:
         description: "Turkey time publishing slot"
