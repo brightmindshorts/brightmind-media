@@ -2,6 +2,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import subprocess
 import time
 import urllib.error
@@ -25,10 +26,49 @@ REPO = os.environ.get("GITHUB_REPOSITORY", "")
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed.ttf"
 
 
+def redact(message):
+    for name in ("INSTAGRAM_ACCESS_TOKEN", "GITHUB_TOKEN", "GH_TOKEN"):
+        secret = os.environ.get(name, "").strip()
+        if secret:
+            message = message.replace(secret, "[REDACTED]")
+    message = re.sub(r"https://[^/\s@]+@", "https://[REDACTED]@", message)
+    return message
+
+
 def git(*args):
-    return subprocess.check_output(
-        ["git", *args], text=True, stderr=subprocess.STDOUT
-    ).strip()
+    result = subprocess.run(
+        ["git", *args], text=True, stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+    )
+    if result.returncode:
+        raise RuntimeError(
+            "Git command failed: " + " ".join(args) + "\n"
+            + redact(result.stdout)
+        ) from None
+    return result.stdout.strip()
+
+
+def push_records():
+    for attempt in range(3):
+        try:
+            git("push", "origin", "HEAD:main")
+            return
+        except RuntimeError as error:
+            print(str(error), flush=True)
+            if attempt == 2:
+                raise
+            time.sleep(5 * (attempt + 1))
+            git("fetch", "origin", "main")
+            base = git("merge-base", "HEAD", "origin/main")
+            remote_state = git(
+                "diff", "--name-only", base, "origin/main", "--", "state.json"
+            )
+            if remote_state:
+                raise RuntimeError(
+                    "Remote publishing state changed concurrently. "
+                    "Stopped to protect publishing records; inspect state.json."
+                )
+            git("rebase", "origin/main")
 
 
 def save(state, assets=None):
@@ -39,7 +79,43 @@ def save(state, assets=None):
     git("add", "--", *paths)
     if git("diff", "--cached", "--name-only"):
         git("commit", "-m", "Update publishing state and media")
-        git("push", "origin", "HEAD:main")
+    push_records()
+
+
+def repair_records():
+    state = (
+        json.loads(STATE.read_text(encoding="utf-8"))
+        if STATE.exists() else {"entries": {}}
+    )
+    repaired = []
+    for key, entry in state["entries"].items():
+        if entry.get("abandoned"):
+            continue
+        if entry.get("post") == {} and entry.get("story") == {}:
+            entry["abandoned"] = True
+            entry["abandon_reason"] = (
+                "Both parts were empty before any Meta creation intent. "
+                "Unused content released without publishing."
+            )
+            repaired.append(key)
+    state["last_repository_check"] = datetime.now(
+        ZoneInfo("Europe/Istanbul")
+    ).isoformat()
+    save(state)
+    print("Repository write/push check passed.")
+    print("Released empty records:", ", ".join(repaired) or "none")
+    print("No Instagram API calls or publications were made.")
+    unresolved = [
+        key for key, entry in state["entries"].items()
+        if not entry.get("abandoned")
+        and any(entry.get(part, {}).get("status") != "done"
+                for part in ("post", "story"))
+    ]
+    if unresolved:
+        raise RuntimeError(
+            "Records with possible Meta activity were preserved for review: "
+            + ", ".join(unresolved)
+        )
 
 
 def api(path, data=None):
@@ -176,9 +252,13 @@ def publish_part(state, entry, kind):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", choices=["preview", "publish"], required=True)
+    parser.add_argument("--mode", choices=["preview", "publish", "repair"], required=True)
     parser.add_argument("--slot", choices=["12", "16", "20"], default="12")
     args = parser.parse_args()
+
+    if args.mode == "repair":
+        repair_records()
+        return
 
     items = json.loads(Path("content.json").read_text(encoding="utf-8"))
     if not items:
@@ -221,7 +301,7 @@ def main():
     # Resolve incomplete work before creating a new pair of publications.
     pending = [
         name for name, value in entries.items()
-        if name != key
+        if name != key and not value.get("abandoned")
         and (
             value.get("post", {}).get("status") != "done"
             or value.get("story", {}).get("status") != "done"
@@ -231,7 +311,10 @@ def main():
         raise RuntimeError("An earlier item needs attention: " + pending[0])
 
     if key not in entries:
-        used = {value["fingerprint"] for value in entries.values()}
+        used = {
+            value["fingerprint"] for value in entries.values()
+            if not value.get("abandoned")
+        }
         item = next(
             (item for item in items if fingerprint(item) not in used), None
         )
