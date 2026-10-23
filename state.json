@@ -131,7 +131,9 @@
       "fingerprint": "8c999ed75aa7ae4114b238336c02791ad1ac8fe62cf40780df316f97da3e17a3",
       "text": "Build a routine\nfor your ordinary days.",
       "caption": "Create a version of your habit that fits a busy day, too.\n\n#habits #consistency #discipline",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/22910c3e22245f6187710e2a6d571837e047a355/generated/2026-10-23-20/post.jpg",
