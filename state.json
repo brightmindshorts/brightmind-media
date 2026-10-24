@@ -189,7 +189,11 @@
       "text": "Make your next step\nclear enough to start.",
       "caption": "Replace a vague goal with one action you can take today.\n\n#goals #clarity #smallsteps",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/881a00f2debacdd280b23e96a3109efce2b116e9/generated/2026-10-24-20/post.jpg",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/881a00f2debacdd280b23e96a3109efce2b116e9/generated/2026-10-24-20/story.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
