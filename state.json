@@ -169,7 +169,9 @@
       "fingerprint": "25fbeeeec2a8932d6856cdc7ca969b14253a139b518f52eb251b6751ce6d940d",
       "text": "You missed a day.\nYou can return today.",
       "caption": "Make the next useful choice. A missed session does not have to become a missed week.\n\n#consistency #growth #mindset",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/dbb0235b3c049fefecfeb2723c4a0a204f6231ac/generated/2026-10-24-16/post.jpg",
