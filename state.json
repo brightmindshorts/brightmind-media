@@ -188,7 +188,9 @@
       "fingerprint": "bc9613abca086d91be322ff53924ea0ea32988099c38696c8dd81d9a7afe4991",
       "text": "Make your next step\nclear enough to start.",
       "caption": "Replace a vague goal with one action you can take today.\n\n#goals #clarity #smallsteps",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/881a00f2debacdd280b23e96a3109efce2b116e9/generated/2026-10-24-20/post.jpg",
