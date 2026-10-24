@@ -170,7 +170,11 @@
       "text": "You missed a day.\nYou can return today.",
       "caption": "Make the next useful choice. A missed session does not have to become a missed week.\n\n#consistency #growth #mindset",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/dbb0235b3c049fefecfeb2723c4a0a204f6231ac/generated/2026-10-24-16/post.jpg",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/dbb0235b3c049fefecfeb2723c4a0a204f6231ac/generated/2026-10-24-16/story.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
