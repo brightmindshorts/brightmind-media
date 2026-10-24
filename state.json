@@ -150,7 +150,9 @@
       "fingerprint": "b58974635aee976c119cd1da75ab7223ce2cc09e5845f19490e386e9b7620ade",
       "text": "Less switching.\nMore finishing.",
       "caption": "Give one task your attention before opening the next.\n\n#focus #productivity #habits",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/c0b7a94aa676aab514c475cf1349a42c4be2e50f/generated/2026-10-24-12/post.jpg",
