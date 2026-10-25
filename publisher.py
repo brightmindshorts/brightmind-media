@@ -13,6 +13,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from PIL import Image, ImageDraw, ImageFont
+from reel_renderer import render_reel
 
 
 ROOT = Path(__file__).resolve().parent
@@ -179,7 +180,7 @@ def fingerprint(item):
     return hashlib.sha256(item["text"].encode()).hexdigest()
 
 
-def publish_part(state, entry, kind):
+def publish_part(state, entry, kind, prepare_only=False):
     part = entry.setdefault(kind, {})
 
     if part.get("status") == "done":
@@ -196,7 +197,10 @@ def publish_part(state, entry, kind):
         part["status"] = "creating"
         save(state)
 
-        data = {"image_url": entry["urls"][kind]}
+        video = kind == "post" and entry.get("format") == "reel"
+        data = {"video_url" if video else "image_url": entry["urls"][kind]}
+        if video:
+            data.update(media_type="REELS", share_to_feed="true", cover_url=entry["urls"]["cover"])
         if kind == "story":
             data["media_type"] = "STORIES"
         else:
@@ -213,7 +217,7 @@ def publish_part(state, entry, kind):
     container = part["container"]
     previous_publish_uncertain = part.get("status") == "publishing"
 
-    for attempt in range(18):
+    for attempt in range(12):
         result = api(container + "?fields=status_code")
         status = result.get("status_code")
         print(kind, "container", container, "status", status, flush=True)
@@ -233,9 +237,15 @@ def publish_part(state, entry, kind):
             break
         if status in ("ERROR", "EXPIRED"):
             raise RuntimeError(f"{kind}: container is {status}")
-        time.sleep(10)
+        time.sleep(30)
     else:
         raise RuntimeError("Media is still processing; its ID was saved.")
+
+    if prepare_only:
+        part["status"] = "ready"
+        save(state)
+        print(kind, "READY; not published", flush=True)
+        return
 
     part["status"] = "publishing"
     save(state)
@@ -252,7 +262,7 @@ def publish_part(state, entry, kind):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", choices=["preview", "publish", "repair"], required=True)
+    parser.add_argument("--mode", choices=["preview", "publish", "repair", "stage"], required=True)
     parser.add_argument("--slot", choices=["12", "16", "20"], default="12")
     args = parser.parse_args()
 
@@ -260,12 +270,17 @@ def main():
         repair_records()
         return
 
-    items = json.loads(Path("content.json").read_text(encoding="utf-8"))
+    is_reel = args.slot == "16"
+    bank_file = "reels.json" if is_reel else "content.json"
+    items = json.loads(Path(bank_file).read_text(encoding="utf-8"))
     if not items:
         raise RuntimeError("The content bank is empty.")
 
     if args.mode == "preview":
-        render(items[0]["text"], Path("preview"))
+        if is_reel:
+            render_reel(items[0], Path("preview"))
+        else:
+            render(items[0]["text"], Path("preview"))
         Path("preview/caption.txt").write_text(
             items[0]["caption"], encoding="utf-8"
         )
@@ -279,7 +294,7 @@ def main():
 
     now = datetime.now(ZoneInfo("Europe/Istanbul"))
     hour = int(args.slot)
-    if now.hour != hour:
+    if args.mode == "publish" and now.hour != hour:
         raise RuntimeError(
             "Outside the selected one-hour publishing window. Slot skipped."
         )
@@ -297,6 +312,9 @@ def main():
     )
     entries = state["entries"]
     key = f"{now:%Y-%m-%d}-{args.slot}"
+
+    if args.mode == "stage" and hour < now.hour:
+        raise RuntimeError("Cannot stage a past slot")
 
     # Resolve incomplete work before creating a new pair of publications.
     pending = [
@@ -324,8 +342,12 @@ def main():
             )
 
         folder = Path("generated") / key
-        render(item["text"], folder)
+        if is_reel:
+            render_reel(item, folder)
+        else:
+            render(item["text"], folder)
         entry = {
+            "format": "reel" if is_reel else "image",
             "fingerprint": fingerprint(item),
             "text": item["text"],
             "caption": item["caption"],
@@ -340,23 +362,29 @@ def main():
         entry["urls"] = {
             kind: (
                 f"https://raw.githubusercontent.com/{REPO}/{revision}/"
-                f"{folder.as_posix()}/{kind}.jpg"
+                f"{folder.as_posix()}/{'reel.mp4' if kind == 'post' and is_reel else kind + '.jpg'}"
             )
             for kind in ("post", "story")
         }
+        if is_reel:
+            entry["urls"]["cover"] = (
+                f"https://raw.githubusercontent.com/{REPO}/{revision}/"
+                f"{folder.as_posix()}/cover.jpg"
+            )
         save(state)
     else:
         entry = entries[key]
         if "urls" not in entry:
             raise RuntimeError("Asset setup was interrupted; inspect state.json.")
 
-    publish_part(state, entry, "post")
-    publish_part(state, entry, "story")
+    prepare_only = args.mode == "stage"
+    publish_part(state, entry, "post", prepare_only)
+    publish_part(state, entry, "story", prepare_only)
 
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
         with open(summary, "a") as stream:
-            stream.write(f"Published post and story for `{key}`.\n")
+            stream.write(f"{'Prepared (not published)' if prepare_only else 'Published'} post and story for `{key}`.\n")
 
 
 if __name__ == "__main__":
