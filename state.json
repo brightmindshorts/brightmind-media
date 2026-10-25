@@ -231,7 +231,9 @@
         "status": "ready",
         "container": "17901323220606736"
       },
-      "story": {},
+      "story": {
+        "status": "creating"
+      },
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/f7925e37ffa44fb8aeb98ad35da4c883af4ac269/generated/2026-10-25-16/reel.mp4",
         "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/f7925e37ffa44fb8aeb98ad35da4c883af4ac269/generated/2026-10-25-16/story.jpg",
