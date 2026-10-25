@@ -228,7 +228,12 @@
       "text": "Before you open\nanother app.",
       "caption": "Give your next task a clear opening: decide what you will do before reaching for your phone.\n\n#focus #attention #habits",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/f7925e37ffa44fb8aeb98ad35da4c883af4ac269/generated/2026-10-25-16/reel.mp4",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/f7925e37ffa44fb8aeb98ad35da4c883af4ac269/generated/2026-10-25-16/story.jpg",
+        "cover": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/f7925e37ffa44fb8aeb98ad35da4c883af4ac269/generated/2026-10-25-16/cover.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
