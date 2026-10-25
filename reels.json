@@ -1,0 +1,134 @@
+[
+  {
+    "text": "Before you open\nanother app.",
+    "caption": "Give your next task a clear opening: decide what you will do before reaching for your phone.\n\n#focus #attention #habits",
+    "scenes": [
+      "Before another scroll,\npause for a moment.",
+      "What did you mean\nto do next?",
+      "Put that action\nwhere you can see it.",
+      "Give it four minutes\nof your attention."
+    ],
+    "story_text": "Before another scroll,\nchoose your next action."
+  },
+  {
+    "text": "Build an exit ramp\nfor distractions.",
+    "caption": "Keep a scrap of paper beside you. Capture distracting ideas there and return to your current task.\n\n#focus #clarity #practice",
+    "scenes": [
+      "A new idea arrives\nwhile you are working.",
+      "Write it down.\nYou can return later.",
+      "Keep your current task\nin front of you.",
+      "Finish this section.\nThen review the list."
+    ],
+    "story_text": "Capture the distraction.\nReturn to this section."
+  },
+  {
+    "text": "Use a halfway check.",
+    "caption": "Pause midway through a session and check whether you are still working toward the result you chose.\n\n#reflection #focus #intention",
+    "scenes": [
+      "Halfway through,\ntake a brief pause.",
+      "Are you still doing\nwhat you came to do?",
+      "Choose the next\nuseful piece.",
+      "Continue with\nthat piece in mind."
+    ],
+    "story_text": "Halfway check:\nWhat needs attention now?"
+  },
+  {
+    "text": "Make room\nfor maintenance.",
+    "caption": "Choose one small maintenance task you have postponed. Give it a place in your week before it becomes urgent.\n\n#planning #habits #balance",
+    "scenes": [
+      "Some progress looks\nlike maintenance.",
+      "Clear the folder.\nUpdate the checklist.",
+      "Give a small task\na place this week.",
+      "Care for the systems\nyou already use."
+    ],
+    "story_text": "Small maintenance\ncan have a place today."
+  },
+  {
+    "text": "Choose an ending\nbefore you begin.",
+    "caption": "Decide when a work session will end and leave a short handover note for your next session.\n\n#planning #rest #clarity",
+    "scenes": [
+      "Before you start,\nchoose an end time.",
+      "Work on the task\ninside that window.",
+      "When the window ends,\nwrite a handover note.",
+      "Close the session.\nLet the evening begin."
+    ],
+    "story_text": "Choose an end time.\nLeave a handover note."
+  },
+  {
+    "text": "Separate gathering\nfrom making.",
+    "caption": "Try collecting your materials first, then work with what you have for a short session.\n\n#creativity #focus #practice",
+    "scenes": [
+      "Still collecting\none more resource?",
+      "Gather what you need\nfor this attempt.",
+      "Close the search.\nUse what you gathered.",
+      "Review the gaps\nafter you make a draft."
+    ],
+    "story_text": "Gather enough to try.\nThen make a draft."
+  },
+  {
+    "text": "Borrow your own\nuseful instructions.",
+    "caption": "Write a short checklist for a task you repeat. Test it once and improve the unclear steps.\n\n#habits #learning #clarity",
+    "scenes": [
+      "A familiar task\nfeels messy again.",
+      "Write the steps\nas you complete them.",
+      "Keep the checklist\nshort and usable.",
+      "Test it next time.\nImprove one step."
+    ],
+    "story_text": "Write the steps once.\nImprove them next time."
+  },
+  {
+    "text": "Try a smaller\nwork surface.",
+    "caption": "Move unrelated materials out of your workspace for one session and notice what changes.\n\n#focus #environment #habits",
+    "scenes": [
+      "Your desk is full.\nYour task is specific.",
+      "Keep what this\nsession actually needs.",
+      "Move the rest\nout of the way.",
+      "Try one session.\nNotice what changes."
+    ],
+    "story_text": "Give this task\na little clear space."
+  },
+  {
+    "text": "Let feedback\nbe something you use.",
+    "caption": "Ask a focused question about your work, then choose one piece of feedback to test.\n\n#learning #growth #practice",
+    "scenes": [
+      "Ready for feedback?\nAsk a clear question.",
+      "Which part feels\nhard to follow?",
+      "Listen for details\nyou can work with.",
+      "Test one adjustment\nin your next version."
+    ],
+    "story_text": "Ask a clear question.\nTest one adjustment."
+  },
+  {
+    "text": "Pick a useful\nwaiting task.",
+    "caption": "Keep a short list of low-effort tasks for small gaps in your day. Leave some gaps free for rest.\n\n#planning #balance #intention",
+    "scenes": [
+      "You have a small gap\nbefore the next thing.",
+      "You can rest.\nYou can do a tiny task.",
+      "Choose deliberately.\nLeave the rush aside.",
+      "Use the gap in a way\nthat fits today."
+    ],
+    "story_text": "A small gap can be\nspace to rest, too."
+  },
+  {
+    "text": "Notice when\nmore becomes enough.",
+    "caption": "Set a limit for research, revisions, or checking before you start. Review whether that limit helped afterward.\n\n#boundaries #clarity #focus",
+    "scenes": [
+      "Another check?\nAnother revision?",
+      "Choose a limit\nbefore you begin.",
+      "Work within it.\nSave unresolved notes.",
+      "Review the limit\nafter this attempt."
+    ],
+    "story_text": "Choose a limit.\nSave the remaining notes."
+  },
+  {
+    "text": "Make recovery\na deliberate choice.",
+    "caption": "At the end of a demanding day, choose one simple activity that helps you unwind.\n\n#rest #balance #selfrespect",
+    "scenes": [
+      "The demanding part\nof today is over.",
+      "What would help you\nunwind this evening?",
+      "Choose something\nsimple and reachable.",
+      "Give that choice\nsome space tonight."
+    ],
+    "story_text": "The day can end\nwith a little recovery."
+  }
+]
