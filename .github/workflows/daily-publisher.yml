@@ -17,6 +17,7 @@ on:
           - preview
           - publish
           - repair
+          - stage
 
       slot:
         description: "Turkey time publishing slot"
@@ -54,6 +55,11 @@ jobs:
       - name: Install image tools
         run: python3 -m pip install Pillow==11.3.0
 
+      - name: Install video tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+
       - name: Select mode and time slot
         id: settings
         env:
@@ -80,7 +86,7 @@ jobs:
           echo "slot=$slot" >> "$GITHUB_OUTPUT"
 
       - name: Check Python syntax
-        run: python3 -m py_compile publisher.py
+        run: python3 -m py_compile publisher.py reel_renderer.py
 
       - name: Generate or publish content
         env:
