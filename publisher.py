@@ -4,6 +4,7 @@ import json
 import os
 import re
 import subprocess
+import shutil
 import time
 import urllib.error
 import urllib.parse
@@ -260,6 +261,30 @@ def publish_part(state, entry, kind, prepare_only=False):
     print(kind, "published:", media_id, flush=True)
 
 
+def prepare_approved_reel(item, folder):
+    media = item.get("approved_media")
+    if not media:
+        raise RuntimeError("Approved cinematic media is required; text-card fallback disabled.")
+    folder.mkdir(parents=True, exist_ok=True)
+    for kind, name in (("post", "reel.mp4"), ("story", "story.jpg"), ("cover", "cover.jpg")):
+        relative = Path(media[kind]["path"])
+        asset = (ROOT / relative).resolve()
+        if relative.is_absolute() or relative.parts[0] != "prepared" or ROOT not in asset.parents:
+            raise RuntimeError("Approved asset path must stay inside prepared/.")
+        if hashlib.sha256(asset.read_bytes()).hexdigest() != media[kind]["sha256"]:
+            raise RuntimeError("Approved media hash changed: " + kind)
+        shutil.copyfile(asset, folder / name)
+    probe = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(folder / "reel.mp4")], text=True))
+    video = next(x for x in probe["streams"] if x["codec_type"] == "video")
+    audio = next(x for x in probe["streams"] if x["codec_type"] == "audio")
+    if (video["codec_name"], video["width"], video["height"], audio["codec_name"]) != ("h264", 1080, 1920, "aac"):
+        raise RuntimeError("Approved video format does not match production requirements.")
+    if not 15.8 <= float(probe["format"]["duration"]) <= 16.2:
+        raise RuntimeError("Approved Reel duration is unexpected.")
+    (folder / "caption.txt").write_text(item["caption"], encoding="utf-8")
+    print("Approved cinematic Reel verified; original video and narration preserved.", flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["preview", "publish", "repair", "stage"], required=True)
@@ -273,12 +298,14 @@ def main():
     is_reel = args.slot == "16"
     bank_file = "reels.json" if is_reel else "content.json"
     items = json.loads(Path(bank_file).read_text(encoding="utf-8"))
+    if is_reel:
+        items = [item for item in items if item.get("approved_media")]
     if not items:
         raise RuntimeError("The content bank is empty.")
 
     if args.mode == "preview":
         if is_reel:
-            render_reel(items[0], Path("preview"))
+            prepare_approved_reel(items[0], Path("preview"))
         else:
             render(items[0]["text"], Path("preview"))
         Path("preview/caption.txt").write_text(
@@ -343,7 +370,7 @@ def main():
 
         folder = Path("generated") / key
         if is_reel:
-            render_reel(item, folder)
+            prepare_approved_reel(item, folder)
         else:
             render(item["text"], folder)
         entry = {
