@@ -248,7 +248,9 @@
       "fingerprint": "e4074dce3516015a8e0b671a79049bfb250c86bef89df2815eacd9038d05a8ad",
       "text": "Rest belongs\nin the plan.",
       "caption": "Leave space to recover. Build a pace you can sustain.\n\n#balance #rest #consistency",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/941d5a32ac7c96a1dae91bba4ec480d3b0d4f10f/generated/2026-10-26-12/post.jpg",
