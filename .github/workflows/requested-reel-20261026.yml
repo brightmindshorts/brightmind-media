@@ -1,0 +1,51 @@
+name: Publish requested Reel October 26
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: daily-instagram-publisher
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - name: Configure records
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Check video tools
+        run: |
+          command -v ffmpeg
+          command -v ffprobe
+          test -f /usr/share/fonts/truetype/dejavu/DejaVuSansCondensed.ttf
+          python3 -m pip install Pillow==11.3.0
+      - name: Publish requested Reel and story
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_USER_ID: ${{ vars.INSTAGRAM_USER_ID }}
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          from pathlib import Path
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          now = datetime.now(ZoneInfo("Europe/Istanbul"))
+          assert str(now.date()) == "2026-10-26" and now.hour >= 20, "One-time date guard"
+          state = json.loads(Path("state.json").read_text())
+          today = [e for k,e in state["entries"].items() if k.startswith("2026-10-26-") and not e.get("abandoned")]
+          assert len(today) < 3, "Daily publication limit"
+          existing = state["entries"].get("2026-10-26-20")
+          assert not existing or existing.get("format") == "reel", "Another format already owns the evening slot"
+          path = Path("publisher.py").resolve()
+          source = path.read_text()
+          assert 'is_reel = args.slot == "16"' in source
+          source = source.replace('is_reel = args.slot == "16"', 'is_reel = True', 1)
+          source = source.replace('if args.mode == "publish" and now.hour != hour:', 'if False:', 1)
+          sys.argv = [str(path), "--mode", "publish", "--slot", "20"]
+          exec(compile(source, str(path), "exec"), {"__name__": "__main__", "__file__": str(path)})
+          PY
