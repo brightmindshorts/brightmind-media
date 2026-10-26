@@ -2,6 +2,7 @@ name: Daily Instagram publisher
 
 on:
   schedule:
+    # Istanbul: 12:07 image, 16:07 Reel, 20:07 image; each with a story.
     - cron: "7 9 * * *"
     - cron: "7 13 * * *"
     - cron: "7 17 * * *"
@@ -57,8 +58,9 @@ jobs:
 
       - name: Install video tools
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y ffmpeg fonts-dejavu-core
+          timeout 240 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 install -y ffmpeg fonts-dejavu-core
+          command -v ffmpeg
+          command -v ffprobe
 
       - name: Select mode and time slot
         id: settings
