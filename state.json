@@ -269,7 +269,12 @@
       "text": "Build an exit ramp\nfor distractions.",
       "caption": "Keep a scrap of paper beside you. Capture distracting ideas there and return to your current task.\n\n#focus #clarity #practice",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/2fac4df084cd201ec92dbdaeb8447d7349d9c8fd/generated/2026-10-26-20/reel.mp4",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/2fac4df084cd201ec92dbdaeb8447d7349d9c8fd/generated/2026-10-26-20/story.jpg",
+        "cover": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/2fac4df084cd201ec92dbdaeb8447d7349d9c8fd/generated/2026-10-26-20/cover.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
