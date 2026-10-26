@@ -58,6 +58,7 @@ jobs:
 
       - name: Install video tools
         run: |
+          sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources
           timeout 240 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 install -y ffmpeg fonts-dejavu-core
           command -v ffmpeg
           command -v ffprobe
