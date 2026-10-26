@@ -268,7 +268,9 @@
       "fingerprint": "3245d5a51f38eee9eb3d01ced4c1344adc19d95f982d659b8b55c649d6414097",
       "text": "Build an exit ramp\nfor distractions.",
       "caption": "Keep a scrap of paper beside you. Capture distracting ideas there and return to your current task.\n\n#focus #clarity #practice",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/2fac4df084cd201ec92dbdaeb8447d7349d9c8fd/generated/2026-10-26-20/reel.mp4",
