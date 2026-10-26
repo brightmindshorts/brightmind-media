@@ -20,9 +20,9 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Check video tools
         run: |
+          timeout 240 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 install -y ffmpeg fonts-dejavu-core
           command -v ffmpeg
           command -v ffprobe
-          test -f /usr/share/fonts/truetype/dejavu/DejaVuSansCondensed.ttf
           python3 -m pip install Pillow==11.3.0
       - name: Publish requested Reel and story
         env:
