@@ -10,7 +10,22 @@
     ],
     "story_text": "One page after lunch.\nTry a steady week.",
     "scheduled_for": "2026-10-27",
-    "scheduled_slot": "16"
+    "scheduled_slot": "16",
+    "approved_media": {
+      "post": {
+        "path": "prepared/2026-10-27-reel/reel.mp4",
+        "sha256": "07ed224af5753b66f868e9d5f2066289758f550243893b77676a0edfd75afdd3"
+      },
+      "story": {
+        "path": "prepared/2026-10-27-reel/story.jpg",
+        "sha256": "8c5a654c1239238ca7a90a9de6e4c6c68c34d2012b87e1868076403df09cec00"
+      },
+      "cover": {
+        "path": "prepared/2026-10-27-reel/cover.jpg",
+        "sha256": "8c5a654c1239238ca7a90a9de6e4c6c68c34d2012b87e1868076403df09cec00"
+      }
+    },
+    "style": "cinematic-male-soft-v3"
   },
   {
     "text": "Before you open\nanother app.",
