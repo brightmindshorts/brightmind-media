@@ -290,7 +290,11 @@
       "text": "Give your goal\na place on your calendar.",
       "caption": "Decide when you will work on it, and what you will do first.\n\n#planning #goals #focus",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/c56891bf51f855a1da2f1e34f8b3457bfc26cc98/generated/2026-10-27-12/post.jpg",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/c56891bf51f855a1da2f1e34f8b3457bfc26cc98/generated/2026-10-27-12/story.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
