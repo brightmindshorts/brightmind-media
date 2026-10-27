@@ -289,7 +289,9 @@
       "fingerprint": "5cdb47e121d6075c61ed2b6485f22c18fe6f5b41f1d1ae63de2985650c52b74c",
       "text": "Give your goal\na place on your calendar.",
       "caption": "Decide when you will work on it, and what you will do first.\n\n#planning #goals #focus",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/c56891bf51f855a1da2f1e34f8b3457bfc26cc98/generated/2026-10-27-12/post.jpg",
