@@ -1,5 +1,33 @@
 [
   {
+    "text": "Put the phone away.\nGive the first line a chance.",
+    "caption": "Put your phone away before your next drawing session. Start with one line and give yourself room to revise.\n\n#creativepractice #smallsteps #focus",
+    "scenes": [
+      "Phone away.\nRoom to begin.",
+      "Open the sketchbook.\nKeep it simple.",
+      "One imperfect line.\nYou can revise.",
+      "See what follows.\nStay with the page."
+    ],
+    "story_text": "Put the phone away.\nGive the first line a chance.",
+    "scheduled_for": "2026-10-28",
+    "scheduled_slot": "16",
+    "approved_media": {
+      "post": {
+        "path": "prepared/2026-10-28-reel/reel.mp4",
+        "sha256": "49476f9fb6b91a3f83b76072d63f3439205c16b87c673e0387f69c904e9151c7"
+      },
+      "story": {
+        "path": "prepared/2026-10-28-reel/story.jpg",
+        "sha256": "5d77c7b277dda14bb887928ab893569996e6123b52ba2b8ebf6e43115c799073"
+      },
+      "cover": {
+        "path": "prepared/2026-10-28-reel/cover.jpg",
+        "sha256": "7896378b0222dbf69671fe5ecf67f9a7e885eeedb1336405ab5c732a09d81d02"
+      }
+    },
+    "style": "cinematic-male-soft-v3"
+  },
+  {
     "text": "Let a new habit\nstay small for a week.",
     "caption": "Try reading one page after lunch for a week before adding more. Notice whether that version fits your day before changing its size.\n\n#habits #patience #sustainablegrowth",
     "scenes": [
