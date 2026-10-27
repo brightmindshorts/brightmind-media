@@ -1,4 +1,4 @@
-name: Publish requested Reel October 26
+name: Publish requested Reel October 27
 on:
   workflow_dispatch:
 permissions:
@@ -20,7 +20,12 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Check video tools
         run: |
-          timeout 240 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 install -y ffmpeg fonts-dejavu-core
+          sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources
+          if [ -f /etc/apt/apt-mirrors.txt ]; then
+            printf '%s\n' 'https://archive.ubuntu.com/ubuntu' | sudo tee /etc/apt/apt-mirrors.txt >/dev/null
+          fi
+          timeout 90 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 update
+          timeout 240 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 install -y --no-install-recommends ffmpeg fonts-dejavu-core
           command -v ffmpeg
           command -v ffprobe
           python3 -m pip install Pillow==11.3.0
@@ -35,16 +40,18 @@ jobs:
           from datetime import datetime
           from zoneinfo import ZoneInfo
           now = datetime.now(ZoneInfo("Europe/Istanbul"))
-          assert str(now.date()) == "2026-10-26" and now.hour >= 20, "One-time date guard"
+          assert str(now.date()) == "2026-10-27" and 18 <= now.hour <= 21, "One-time date guard"
           state = json.loads(Path("state.json").read_text())
-          today = [e for k,e in state["entries"].items() if k.startswith("2026-10-26-") and not e.get("abandoned")]
+          today = [e for k,e in state["entries"].items() if k.startswith("2026-10-27-") and not e.get("abandoned")]
           assert len(today) < 3, "Daily publication limit"
-          existing = state["entries"].get("2026-10-26-20")
+          assert not any(k.startswith("2026-10-27-") and k != "2026-10-27-20" and e.get("format") == "reel" and not e.get("abandoned") for k,e in state["entries"].items()), "A Reel already exists today"
+          existing = state["entries"].get("2026-10-27-20")
           assert not existing or existing.get("format") == "reel", "Another format already owns the evening slot"
           path = Path("publisher.py").resolve()
           source = path.read_text()
           assert 'is_reel = args.slot == "16"' in source
           source = source.replace('is_reel = args.slot == "16"', 'is_reel = True', 1)
+          assert 'if args.mode == "publish" and now.hour != hour:' in source
           source = source.replace('if args.mode == "publish" and now.hour != hour:', 'if False:', 1)
           sys.argv = [str(path), "--mode", "publish", "--slot", "20"]
           exec(compile(source, str(path), "exec"), {"__name__": "__main__", "__file__": str(path)})
