@@ -310,7 +310,12 @@
       "text": "Let a new habit\nstay small for a week.",
       "caption": "Try reading one page after lunch for a week before adding more. Notice whether that version fits your day before changing its size.\n\n#habits #patience #sustainablegrowth",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/dbd231651a22c0be924ee22fab3b3f6f7ac6fe05/generated/2026-10-27-20/reel.mp4",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/dbd231651a22c0be924ee22fab3b3f6f7ac6fe05/generated/2026-10-27-20/story.jpg",
+        "cover": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/dbd231651a22c0be924ee22fab3b3f6f7ac6fe05/generated/2026-10-27-20/cover.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
