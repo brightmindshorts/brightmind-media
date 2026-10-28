@@ -372,7 +372,11 @@
       "text": "Notice the effort\nyou used to overlook.",
       "caption": "Write down one useful action you took today, however small.\n\n#reflection #progress #smallsteps",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/daa0dc9f5581e20ef2bc884f0ed8939602de7ff3/generated/2026-10-28-20/post.jpg",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/daa0dc9f5581e20ef2bc884f0ed8939602de7ff3/generated/2026-10-28-20/story.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
