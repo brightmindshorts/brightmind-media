@@ -1,5 +1,33 @@
 [
   {
+    "text": "Leave tomorrow a note.\nLet tonight be finished.",
+    "caption": "Before finishing tonight, leave yourself one clear action for tomorrow. Close the notebook and let this session end.\n\n#eveningroutine #smallsteps #balance",
+    "scenes": [
+      "One small next step.\nWrite it down.",
+      "Leave a simple note.\nMake it easy to find.",
+      "Close the notebook.\nThis session can end.",
+      "Step away for tonight.\nReturn when it is time."
+    ],
+    "story_text": "Leave tomorrow a note.\nLet tonight be finished.",
+    "scheduled_for": "2026-10-29",
+    "scheduled_slot": "16",
+    "approved_media": {
+      "post": {
+        "path": "prepared/2026-10-29-reel/reel.mp4",
+        "sha256": "9cb82d45a6ed2b994ae982ab397f24448630722937da9162d910a67a4d024cca"
+      },
+      "story": {
+        "path": "prepared/2026-10-29-reel/story.jpg",
+        "sha256": "cb5826bdbee0d3c91516961c460cc68704c3b0e1b8035a13166a5f0d9a576256"
+      },
+      "cover": {
+        "path": "prepared/2026-10-29-reel/cover.jpg",
+        "sha256": "46351005cca88822ff641259018aa98141cddc79bcecff80f308c8b8dbf36ec6"
+      }
+    },
+    "style": "cinematic-male-soft-v3"
+  },
+  {
     "text": "Put the phone away.\nGive the first line a chance.",
     "caption": "Put your phone away before your next drawing session. Start with one line and give yourself room to revise.\n\n#creativepractice #smallsteps #focus",
     "scenes": [
