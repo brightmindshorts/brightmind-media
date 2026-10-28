@@ -351,7 +351,12 @@
       "text": "Put the phone away.\nGive the first line a chance.",
       "caption": "Put your phone away before your next drawing session. Start with one line and give yourself room to revise.\n\n#creativepractice #smallsteps #focus",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/a1efed35af65a030c4f7d81fd0cbc64666fbda3d/generated/2026-10-28-16/reel.mp4",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/a1efed35af65a030c4f7d81fd0cbc64666fbda3d/generated/2026-10-28-16/story.jpg",
+        "cover": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/a1efed35af65a030c4f7d81fd0cbc64666fbda3d/generated/2026-10-28-16/cover.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
