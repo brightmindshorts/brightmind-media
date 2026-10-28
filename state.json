@@ -356,8 +356,9 @@
         "media_id": "17997136116046616"
       },
       "story": {
-        "status": "publishing",
-        "container": "17901962556606736"
+        "status": "done",
+        "container": "17901962556606736",
+        "media_id": "18131099665880349"
       },
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/a1efed35af65a030c4f7d81fd0cbc64666fbda3d/generated/2026-10-28-16/reel.mp4",
