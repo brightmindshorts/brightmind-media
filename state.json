@@ -372,7 +372,8 @@
       "text": "Notice the effort\nyou used to overlook.",
       "caption": "Write down one useful action you took today, however small.\n\n#reflection #progress #smallsteps",
       "post": {
-        "status": "creating"
+        "status": "processing",
+        "container": "17902000803606736"
       },
       "story": {},
       "urls": {
