@@ -412,7 +412,12 @@
       "text": "Leave tomorrow a note.\nLet tonight be finished.",
       "caption": "Before finishing tonight, leave yourself one clear action for tomorrow. Close the notebook and let this session end.\n\n#eveningroutine #smallsteps #balance",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/29acf77b862825ce2ce17a8f7a7d97b2bc081615/generated/2026-10-29-20/reel.mp4",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/29acf77b862825ce2ce17a8f7a7d97b2bc081615/generated/2026-10-29-20/story.jpg",
+        "cover": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/29acf77b862825ce2ce17a8f7a7d97b2bc081615/generated/2026-10-29-20/cover.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
