@@ -392,7 +392,11 @@
       "text": "Prepare your space.\nMake starting easier.",
       "caption": "Leave the book open, the shoes ready, or the next task written down.\n\n#habits #discipline #focus",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/d99d2ee2f0f0cbc47e7f095793fa2532728f8791/generated/2026-10-29-12/post.jpg",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/d99d2ee2f0f0cbc47e7f095793fa2532728f8791/generated/2026-10-29-12/story.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
