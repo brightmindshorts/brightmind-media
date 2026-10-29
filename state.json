@@ -412,7 +412,8 @@
       "text": "Leave tomorrow a note.\nLet tonight be finished.",
       "caption": "Before finishing tonight, leave yourself one clear action for tomorrow. Close the notebook and let this session end.\n\n#eveningroutine #smallsteps #balance",
       "post": {
-        "status": "creating"
+        "status": "processing",
+        "container": "17902180305606736"
       },
       "story": {},
       "urls": {
