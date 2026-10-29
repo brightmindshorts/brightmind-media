@@ -1,4 +1,4 @@
-name: Publish requested Reel October 27
+name: Publish requested Reel October 29
 on:
   workflow_dispatch:
 permissions:
@@ -40,12 +40,12 @@ jobs:
           from datetime import datetime
           from zoneinfo import ZoneInfo
           now = datetime.now(ZoneInfo("Europe/Istanbul"))
-          assert str(now.date()) == "2026-10-27" and 18 <= now.hour <= 21, "One-time date guard"
+          assert str(now.date()) == "2026-10-29" and 18 <= now.hour <= 19, "One-time date guard"
           state = json.loads(Path("state.json").read_text())
-          today = [e for k,e in state["entries"].items() if k.startswith("2026-10-27-") and not e.get("abandoned")]
+          today = [e for k,e in state["entries"].items() if k.startswith("2026-10-29-") and not e.get("abandoned")]
           assert len(today) < 3, "Daily publication limit"
-          assert not any(k.startswith("2026-10-27-") and k != "2026-10-27-20" and e.get("format") == "reel" and not e.get("abandoned") for k,e in state["entries"].items()), "A Reel already exists today"
-          existing = state["entries"].get("2026-10-27-20")
+          assert not any(k.startswith("2026-10-29-") and k != "2026-10-29-20" and e.get("format") == "reel" and not e.get("abandoned") for k,e in state["entries"].items()), "A Reel already exists today"
+          existing = state["entries"].get("2026-10-29-20")
           assert not existing or existing.get("format") == "reel", "Another format already owns the evening slot"
           path = Path("publisher.py").resolve()
           source = path.read_text()
