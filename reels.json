@@ -1,5 +1,33 @@
 [
   {
+    "style": "cinematic-male-soft-v3",
+    "approved_media": {
+      "cover": {
+        "sha256": "5e75d831360b2b8be3bdd748e2b7ab739b200e5e9431a7363f8367656778f2b1",
+        "path": "prepared/2026-10-30-reel/cover.jpg"
+      },
+      "post": {
+        "sha256": "b9197f29efde323f568b23bc42e92f2d47bfc0f07e3fd847957afa64fcb52b45",
+        "path": "prepared/2026-10-30-reel/reel.mp4"
+      },
+      "story": {
+        "sha256": "39a770f990740f5ec672b7a21c87676c8d566c1186d7e3c712ba08511ca4def0",
+        "path": "prepared/2026-10-30-reel/story.jpg"
+      }
+    },
+    "caption": "An uneven first attempt can still be useful. Choose one detail to adjust, keep what you learned, and bring it to the next attempt.\n\n#creativepractice #learning #smallsteps",
+    "scenes": [
+      "Let the first try teach.\nUneven is a beginning.",
+      "Smooth one edge.\nChoose one detail.",
+      "Keep what you made.\nNotice what it taught.",
+      "Try again with one lesson.\nLet practice continue."
+    ],
+    "text": "Let the first try teach.\nBring one lesson forward.",
+    "scheduled_for": "2026-10-30",
+    "story_text": "Let the first try teach.\nBring one lesson forward.",
+    "scheduled_slot": "16"
+  },
+  {
     "text": "Leave tomorrow a note.\nLet tonight be finished.",
     "caption": "Before finishing tonight, leave yourself one clear action for tomorrow. Close the notebook and let this session end.\n\n#eveningroutine #smallsteps #balance",
     "scenes": [
