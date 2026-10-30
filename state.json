@@ -432,7 +432,9 @@
       "fingerprint": "91ebb9358b235b5a5bbb55cef6a428f8b0ae5aa0b0f1ee3dd852be344c527937",
       "text": "Choose your pace\nwith the long term in mind.",
       "caption": "Ask what you can keep doing next week, not only what you can do today.\n\n#consistency #patience #growth",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/bf3b630b011240f9eec3427192797573574a1d07/generated/2026-10-30-12/post.jpg",
