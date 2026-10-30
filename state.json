@@ -453,7 +453,12 @@
       "text": "Let the first try teach.\nBring one lesson forward.",
       "caption": "An uneven first attempt can still be useful. Choose one detail to adjust, keep what you learned, and bring it to the next attempt.\n\n#creativepractice #learning #smallsteps",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/b1a4672b4930eacb8401209dec67b331744b656e/generated/2026-10-30-16/reel.mp4",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/b1a4672b4930eacb8401209dec67b331744b656e/generated/2026-10-30-16/story.jpg",
+        "cover": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/b1a4672b4930eacb8401209dec67b331744b656e/generated/2026-10-30-16/cover.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
