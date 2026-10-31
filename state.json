@@ -513,7 +513,9 @@
       "fingerprint": "f4a7bebb58cda48bf27784c8140718ecf55dca2d3b440ce8a56f2c49567d77d3",
       "text": "Protect a little time\nfor an important goal.",
       "caption": "A short, focused session is a useful place to begin.\n\n#focus #goals #smallsteps",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/1d311865b60533256e19543ff7dffefb0392cdff/generated/2026-10-31-20/post.jpg",
