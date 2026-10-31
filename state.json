@@ -514,7 +514,11 @@
       "text": "Protect a little time\nfor an important goal.",
       "caption": "A short, focused session is a useful place to begin.\n\n#focus #goals #smallsteps",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/1d311865b60533256e19543ff7dffefb0392cdff/generated/2026-10-31-20/post.jpg",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/1d311865b60533256e19543ff7dffefb0392cdff/generated/2026-10-31-20/story.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
