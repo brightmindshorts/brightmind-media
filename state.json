@@ -553,7 +553,9 @@
       "fingerprint": "6efcaa5011649ddbde8bcb8a2c666c744e37cb601660866076d3adf097227f14",
       "text": "Set a boundary.\nGive your best work space.",
       "caption": "Choose one interruption you can remove from your next work session. Tell people when you will be available again.\n\n#boundaries #focus #intentionalwork",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/adafdf51fe539e674c3efa180a78f58922ec5440/generated/2026-11-01-20/post.jpg",
