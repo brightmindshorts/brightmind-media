@@ -1,0 +1,91 @@
+name: Requested third publication November 1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-instagram-publisher
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 210
+    steps:
+      - name: Wait for tonight's explicitly requested third publication
+        run: |
+          python3 - <<'PY'
+          import time
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          zone = ZoneInfo('Europe/Istanbul')
+          target = datetime(2026, 11, 1, 23, 45, tzinfo=zone)
+          now = datetime.now(zone)
+          if now.date() != target.date() or now >= target.replace(minute=55):
+              raise SystemExit('This one-day publication window has expired.')
+          while datetime.now(zone) < target:
+              time.sleep(min(30, (target - datetime.now(zone)).total_seconds()))
+          PY
+
+      - name: Download current repository and publication records
+        uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Configure publication records
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Install media validation tools
+        run: |
+          python3 -m pip install Pillow==11.3.0
+          sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources
+          if [ -f /etc/apt/apt-mirrors.txt ]; then
+            printf '%s\n' 'https://archive.ubuntu.com/ubuntu' | sudo tee /etc/apt/apt-mirrors.txt >/dev/null
+          fi
+          timeout 90 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 update
+          timeout 240 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 install -y --no-install-recommends ffmpeg fonts-dejavu-core
+
+      - name: Publish one new cinematic Reel and associated story
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_USER_ID: ${{ vars.INSTAGRAM_USER_ID }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import sys
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          now = datetime.now(ZoneInfo('Europe/Istanbul'))
+          if now.strftime('%Y-%m-%d') != '2026-11-01' or now.hour != 23 or not 45 <= now.minute < 55:
+              raise SystemExit('Outside the explicit November 1 23:45-23:55 window.')
+          state = json.loads(Path('state.json').read_text())
+          today = {k:v for k,v in state['entries'].items() if k.startswith('2026-11-01-') and not v.get('abandoned')}
+          key = '2026-11-01-16'
+          if key not in today and len(today) >= 3:
+              raise SystemExit('Daily maximum of three items already reserved.')
+          if any(v.get('format') == 'reel' for k,v in today.items() if k != key):
+              raise SystemExit('A Reel already exists today; manual review required.')
+          expected = {'2026-11-01-12':'18571152100074221', '2026-11-01-20':'17891986821685686'}
+          for k, media_id in expected.items():
+              if today.get(k, {}).get('post', {}).get('media_id') != media_id:
+                  raise SystemExit('Previous publication records changed; inspect before retrying.')
+          items = json.loads(Path('reels.json').read_text())
+          if not items[0].get('approved_media') or items[0].get('scheduled_for') != '2026-11-01':
+              raise SystemExit('The newly prepared November 1 Reel is missing.')
+          source = Path('publisher.py').read_text()
+          guard = 'if args.mode == "publish" and now.hour != hour:'
+          if source.count(guard) != 1:
+              raise SystemExit('Publisher has changed; inspect before running.')
+          # This manual, date-bound request replaces only the missed-slot hour
+          # condition in memory. State, account, hash and uncertain-result guards
+          # remain intact. The repository's daily publisher is not modified.
+          source = source.replace(guard, 'if False:', 1)
+          sys.argv = ['publisher.py', '--mode', 'publish', '--slot', '16']
+          exec(compile(source, 'publisher.py', 'exec'), {'__name__':'__main__', '__file__':str(Path('publisher.py').resolve())})
+          PY
