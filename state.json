@@ -534,7 +534,11 @@
       "text": "Look back to learn.\nLook ahead to choose.",
       "caption": "What helped this week? Keep one useful habit and adjust one thing for the next.\n\n#reflection #growth #consistency",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/414b902501f2899fed8dc0b2d38c51802e42f325/generated/2026-11-01-12/post.jpg",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/414b902501f2899fed8dc0b2d38c51802e42f325/generated/2026-11-01-12/story.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
