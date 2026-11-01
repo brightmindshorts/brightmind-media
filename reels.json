@@ -1,5 +1,33 @@
 [
   {
+    "text": "Use a halfway check.\nReturn with a clearer direction.",
+    "caption": "Pause midway through a work session and compare what you are doing with what you intended. Choose one useful adjustment, then continue with that piece in mind.\n\n#reflection #creativepractice #focus",
+    "scenes": [
+      "Pause halfway.\nLook again.",
+      "Check your direction.\nWhat did you intend?",
+      "Choose one adjustment.\nKeep it useful.",
+      "Return to the next piece.\nContinue with clarity."
+    ],
+    "story_text": "Pause halfway.\nReturn with clarity.",
+    "scheduled_for": "2026-11-01",
+    "scheduled_slot": "16",
+    "style": "cinematic-male-soft-v3",
+    "approved_media": {
+      "post": {
+        "path": "prepared/2026-11-01-reel/reel.mp4",
+        "sha256": "5956a7e86abc75c3a6fb3a0aeb0b41a58f1c7fb245804a4457c1446f58e61f5d"
+      },
+      "story": {
+        "path": "prepared/2026-11-01-reel/story.jpg",
+        "sha256": "c9345841e5c2b8890cf63e50e1fd2ae597c43005415beb4d81b396fcb3640218"
+      },
+      "cover": {
+        "path": "prepared/2026-11-01-reel/cover.jpg",
+        "sha256": "ceb253c6ba4cc1ec3b1c34e570fbf1c1bf2da15ca70cdd6f0384b2cfc471045e"
+      }
+    }
+  },
+  {
     "style": "cinematic-male-soft-v3",
     "approved_media": {
       "cover": {
