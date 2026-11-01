@@ -533,7 +533,9 @@
       "fingerprint": "5cbb6c7798dd88ff971aa720e1c47719f6c545016b551cbafdbd0b4112eab716",
       "text": "Look back to learn.\nLook ahead to choose.",
       "caption": "What helped this week? Keep one useful habit and adjust one thing for the next.\n\n#reflection #growth #consistency",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/414b902501f2899fed8dc0b2d38c51802e42f325/generated/2026-11-01-12/post.jpg",
