@@ -574,7 +574,12 @@
       "text": "Use a halfway check.\nReturn with a clearer direction.",
       "caption": "Pause midway through a work session and compare what you are doing with what you intended. Choose one useful adjustment, then continue with that piece in mind.\n\n#reflection #creativepractice #focus",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/8aaecf33a91cb39752f3b184e0f953a0100e5bb2/generated/2026-11-01-16/reel.mp4",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/8aaecf33a91cb39752f3b184e0f953a0100e5bb2/generated/2026-11-01-16/story.jpg",
+        "cover": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/8aaecf33a91cb39752f3b184e0f953a0100e5bb2/generated/2026-11-01-16/cover.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
