@@ -654,7 +654,9 @@
       "fingerprint": "e5231448e0d68b648c96948fbac84e70a2e6c2db19b12d71a5226c100f7aa4f3",
       "text": "Give difficult work\na patient first draft.",
       "caption": "Make something you can revise. Let the next pass improve one specific part.\n\n#creativity #practice #patience",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/11cc81114f3343501c8d45163f8027b8e4e523ad/generated/2026-11-04-20/post.jpg",
