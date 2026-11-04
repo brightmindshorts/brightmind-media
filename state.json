@@ -660,7 +660,8 @@
         "media_id": "18652201705041589"
       },
       "story": {
-        "status": "creating"
+        "status": "processing",
+        "container": "17903277351606736"
       },
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/11cc81114f3343501c8d45163f8027b8e4e523ad/generated/2026-11-04-20/post.jpg",
