@@ -674,7 +674,9 @@
       "fingerprint": "b07935f13d153bff7852d5419152b26f86cc466233ecc59a74b7c1ca8d6a15c1",
       "text": "Your next choice\ndeserves your attention.",
       "caption": "Pause before agreeing to another task. Check whether it fits the priorities you already chose.\n\n#priorities #awareness #focus",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/dfd6ac79c284b6753b638cdafbd35e95fd56fbbc/generated/2026-11-05-20/post.jpg",
