@@ -694,7 +694,9 @@
       "fingerprint": "1aeec60766b403b150060a7b3b3b9722d38ccd7a420d9649fa958bb7483e9d4d",
       "text": "Leave some room\nfor an imperfect day.",
       "caption": "Build a little margin into your schedule. A useful routine can make space for delays and real life.\n\n#planning #balance #habits",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/fe6d8a8331542af9018f74fb6aff45da73a5a54a/generated/2026-11-06-20/post.jpg",
