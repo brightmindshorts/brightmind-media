@@ -688,6 +688,14 @@
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/dfd6ac79c284b6753b638cdafbd35e95fd56fbbc/generated/2026-11-05-20/post.jpg",
         "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/dfd6ac79c284b6753b638cdafbd35e95fd56fbbc/generated/2026-11-05-20/story.jpg"
       }
+    },
+    "2026-11-06-20": {
+      "format": "image",
+      "fingerprint": "1aeec60766b403b150060a7b3b3b9722d38ccd7a420d9649fa958bb7483e9d4d",
+      "text": "Leave some room\nfor an imperfect day.",
+      "caption": "Build a little margin into your schedule. A useful routine can make space for delays and real life.\n\n#planning #balance #habits",
+      "post": {},
+      "story": {}
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
