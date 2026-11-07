@@ -734,7 +734,9 @@
       "fingerprint": "5a9237989a47bb22f9388becfb74f7f1007d09f1870367b9f1bb811ecdf3214c",
       "text": "Let your break\nbe a real break.",
       "caption": "Step away from the task for a few minutes. Choose something restful before returning to the screen.\n\n#rest #balance #intentionalliving",
-      "post": {},
+      "post": {
+        "status": "creating"
+      },
       "story": {},
       "urls": {
         "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/bbc46fd49a1686d2e013229f97fc0a51e7b02bdc/generated/2026-11-07-20/post.jpg",
