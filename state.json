@@ -715,7 +715,11 @@
       "text": "Ask a better question.\nFind a useful next move.",
       "caption": "When you feel stuck, ask what information or practice you are missing. Choose one way to get it.\n\n#learning #problemsolving #growth",
       "post": {},
-      "story": {}
+      "story": {},
+      "urls": {
+        "post": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/52ce199ffd776e9bb7186192e33abffd11a2d0e9/generated/2026-11-07-12/post.jpg",
+        "story": "https://raw.githubusercontent.com/brightmindshorts/brightmind-media/52ce199ffd776e9bb7186192e33abffd11a2d0e9/generated/2026-11-07-12/story.jpg"
+      }
     }
   },
   "last_repository_check": "2026-10-23T20:47:50.243656+03:00"
